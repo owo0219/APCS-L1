@@ -1,0 +1,35 @@
+class line:
+  def __init__(self,head,tail):
+    self.head = head
+    self.tail = tail
+
+N = int(input())
+lines = list()
+
+for i in range(N):
+  n = list(map(int,input().split()))
+  lines.append(line(n[0],n[1]))
+
+lines.sort(key=lambda k:(k.head,k.tail))
+x = 0
+H = list()
+T = list()
+H.append(lines[0].head)
+T.append(lines[0].tail)
+
+for i in range(N):
+
+  if lines[i].head <= T[x] and lines[i].tail >= T[x]:
+    T.pop(x)
+    T.append(lines[i].tail)
+
+  elif lines[i].head > T[x]:
+    x = x+1
+    H.append(lines[i].head)
+    T.append(lines[i].tail)
+
+sum = 0
+for i in range(len(T)):
+  sum = sum+T[i]-H[i]
+
+print(sum)
