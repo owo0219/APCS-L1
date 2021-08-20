@@ -1,0 +1,45 @@
+def t_90(arr,R,C):
+
+  arr2 = [[0 for i in range(R)]for j in range(C)]
+  R,C = C,R
+  for i in range(0,R):
+    for j in range(0,C):
+      arr2[i][j] = arr[j][R-1-i]
+
+  return arr2,R,C
+
+def t_180(arr):
+  arr2 = [[0 for i in range(C)]for j in range(R)]
+
+  for j in range(0,C):
+    for i in range(0,R):
+      arr2[i][j] = arr[R-1-i][j]
+
+  return arr2
+
+R,C,M = map(int,input().split())
+arr = [[0 for i in range(C)]for j in range(R)]
+
+for i in range(0,R):
+  n =  list(map(int,input().split()))
+  for j in range(0,C):
+    arr[i][j] = n[j]
+  n = []
+
+
+m = list(map(int,input().split()))
+
+for i in range(len(m)):
+  if m[i] == 0:
+    arr,R,C = t_90(arr,R,C)
+  elif m[i] == 1:
+    arr = t_180(arr)
+
+print(R,C)
+for i in range(0,R):
+  for j in range(0,C):
+    if j == C-1:
+      print(arr[i][j],end='')
+    else:
+      print(arr[i][j],end=' ')
+  print()
